@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Display</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic body reset and font styling */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+        }
+
+        /* The main container that holds all our grid items */
+        .grid-container {
+            display: grid;
+            height: 100vh; /* Make the grid take up the full viewport height */
+            
+            /* Define column sizes. The middle column is wider than the sidebars. */
+            grid-template-columns: 1fr 2.5fr 1.5fr; 
+            
+            /* Define row sizes. Header and Search have automatic height, the main content takes the rest. */
+            grid-template-rows: auto auto 1fr;
+            
+            /* Define the layout areas by giving them names */
+            grid-template-areas:
+                "header header header"
+                "search search search"
+                "left-sidebar middle right-sidebar";
+            
+            /* This creates the white lines between grid items. The gap will show the container's background color. */
+            gap: 2px;
+            background-color: white;
+        }
+
+        /* Style for the Header section */
+        .header {
+            grid-area: header; /* Assign this div to the 'header' grid area */
+            background-color: #e87070;
+            padding: 1rem;
+        }
+
+        /* Style for the Search section */
+        .search {
+            grid-area: search; /* Assign this div to the 'search' grid area */
+            background-color: #98d898;
+            padding: 0.75rem 1rem;
+        }
+
+        /* Style for the Left Sidebar section */
+        .left-sidebar {
+            grid-area: left-sidebar; /* Assign this div to the 'left-sidebar' grid area */
+            background-color: #a6cbe3;
+            padding: 1rem;
+        }
+
+        /* Style for the Middle content section */
+        .middle {
+            grid-area: middle; /* Assign this div to the 'middle' grid area */
+            background-color: #e0e0e0;
+            padding: 1rem;
+        }
+
+        /* Style for the Right Sidebar section */
+        .right-sidebar {
+            grid-area: right-sidebar; /* Assign this div to the 'right-sidebar' grid area */
+            background-color: #e9a3ab;
+            padding: 1rem;
+        }
+
+        /* A shared class for all the colored sections to set text color and padding */
+        .content-box {
+            color: black;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .grid-container {
+                /* On smaller screens, stack all items vertically */
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto 1fr auto; /* Adjust rows for vertical layout */
+                grid-template-areas:
+                    "header"
+                    "search"
+                    "left-sidebar"
+                    "middle"
+                    "right-sidebar";
+                height: auto; /* Allow height to grow with content */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- This is the main container for the grid layout -->
+    <div class="grid-container">
+        
+        <!-- Header Section -->
+        <div class="content-box header">
+            Header
+        </div>
+        
+        <!-- Search Bar Section -->
+        <div class="content-box search">
+            Search
+        </div>
+        
+        <!-- Left Sidebar Section -->
+        <div class="content-box left-sidebar">
+            Left Side Bar
+        </div>
+        
+        <!-- Middle Content Section -->
+        <div class="content-box middle">
+            Middle
+        </div>
+        
+        <!-- Right Sidebar Section -->
+        <div class="content-box right-sidebar">
+            Right side Bar
+        </div>
+
+    </div>
+
+</body>
+</html>
