@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation Example</title>
+</head>
+<body>
+    <form name="myform" onsubmit="return validateForm()">
+        <label>Username</label>
+        <input type="text" name="username"><br><br>
+
+        <label>Email</label>
+        <input type="text" name="Email"><br><br>
+
+        <label>Password:</label>
+        <input type="password" name="password"><br><br>
+
+        <label>Age:</label>
+        <input type="number" name="age" min="1" max="120"><br><br>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            let form = document.forms["myform"];
+
+            let username = form["username"].value.trim();
+            let email = form["Email"].value.trim();
+            let password = form["password"].value.trim();
+            let age = form["age"].value.trim();
+
+            
+        }
+
+        if (uname=== ""){
+            alert("Username must be filled out");
+            return false;
+        }
+
+        if (email === "" || !email.includes("@")){
+            alert("Please enter a valid email");
+            return false;
+        }
+
+        if(pass.length < 6){
+            alert("Password must be atleast 6 characters long");
+            return false;
+        }
+    </script>
+</body>
+</html>
