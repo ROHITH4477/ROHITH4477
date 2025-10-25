@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Wellness Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .wellness-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="min-h-full bg-gradient-to-br from-blue-50 to-purple-50">
+    <!-- Navigation -->
+    <nav class="wellness-gradient shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="text-white text-xl font-bold">🏥 Campus Wellness Hub</div>
+                </div>
+                <div id="nav-buttons" class="flex space-x-4">
+                    <button onclick="showLogin()"
+                        class="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors">Login</button>
+                    <button onclick="showRegister()"
+                        class="bg-white text-purple-600 hover:bg-blue-50 px-4 py-2 rounded-md text-sm font-medium transition-colors">Register</button>
+                </div>
+                <div id="user-menu" class="hidden flex items-center space-x-4">
+                    <span id="welcome-text" class="text-white"></span>
+                    <button onclick="logout()"
+                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div id="login-section" class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
+            <div>
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+                <p class="mt-2 text-center text-sm text-gray-600">Access your wellness dashboard</p>
+            </div>
+            <form id="login-form" class="mt-8 space-y-6">
+                <div class="space-y-4">
+                    <div>
+                        <label for="login-email" class="block text-sm font-medium text-gray-700">Email address</label>
+                        <input id="login-email" name="email" type="email" required
+                            class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                            placeholder="Enter your email">
+                    </div>
+                    <div>
+                        <label for="login-password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input id="login-password" name="password" type="password" required
+                            class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                            placeholder="Enter your password">
+                    </div>
+                </div>
+                <div>
+                    <button type="submit"
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white wellness-gradient hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-opacity">
+                        Sign in
+                    </button>
+                </div>
+                <div class="text-center">
+                    <button type="button" onclick="showRegister()"
+                        class="text-purple-600 hover:text-purple-500 text-sm">Don't have an account? Register
+                        here</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Registration Form -->
+    <div id="register-section" class="hidden min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
+            <div>
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
+                <p class="mt-2 text-center text-sm text-gray-600">Join the wellness community</p>
+            </div>
+            <form id="register-form" class="mt-8 space-y-6">
+                <div class="space-y-4">
+                    <div>
+                        <label for="register-name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input id="register-name" name="name" type="text" required
+                            class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                            placeholder="Enter your full name">
+                    </div>
+                    <div>
+                        <label for="register-email" class="block text-sm font-medium text-gray-700">Email
+                            address</label>
+                        <input id="register-email" name="email" type="email" required
+                            class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                            placeholder="Enter your email">
+                    </div>
+                    <div>
+                        <label for="register-student-id" class="block text-sm font-medium text-gray-700">Student
+                            ID</label>
+                        <input id="register-student-id" name="studentId" type="text" required
+                            class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                            placeholder="Enter your student ID">
+                    </div>
+                    <div>
+                        <label for="register-password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input id="register-password" name="password" type="password" required
+                            class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                            placeholder="Create a password">
+                    </div>
+                </div>
+                <div>
+                    <button type="submit"
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white wellness-gradient hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-opacity">
+                        Create Account
+                    </button>
+                </div>
+                <div class="text-center">
+                    <button type="button" onclick="showLogin()"
+                        class="text-purple-600 hover:text-purple-500 text-sm">Already have an account? Sign in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard" class="hidden fade-in">
+        <!-- Hero Section -->
+        <div class="wellness-gradient text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl font-bold mb-4">Welcome to Your Wellness Journey</h1>
+                <p class="text-xl opacity-90">Your complete guide to physical and mental health on campus</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover">
+                    <div class="text-3xl mb-2">💪</div>
+                    <h3 class="text-lg font-semibold text-gray-900">Physical Health</h3>
+                    <p class="text-gray-600">Fitness & Nutrition</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover">
+                    <div class="text-3xl mb-2">🧠</div>
+                    <h3 class="text-lg font-semibold text-gray-900">Mental Health</h3>
+                    <p class="text-gray-600">Mindfulness & Support</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 text-center card-hover">
+                    <div class="text-3xl mb-2">🏥</div>
+                    <h3 class="text-lg font-semibold text-gray-900">Health Services</h3>
+                    <p class="text-gray-600">Campus Resources</p>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="flex justify-center mb-8">
+                <div class="bg-white rounded-lg shadow-md p-1 flex">
+                    <button onclick="showTab('physical')" id="physical-tab"
+                        class="px-6 py-2 rounded-md text-sm font-medium transition-colors bg-purple-600 text-white">Physical
+                        Health</button>
+                    <button onclick="showTab('mental')" id="mental-tab"
+                        class="px-6 py-2 rounded-md text-sm font-medium transition-colors text-gray-600 hover:text-gray-900">Mental
+                        Health</button>
+                    <button onclick="showTab('resources')" id="resources-tab"
+                        class="px-6 py-2 rounded-md text-sm font-medium transition-colors text-gray-600 hover:text-gray-900">Resources</button>
+                </div>
+            </div>
+
+            <!-- Physical Health Tab -->
+            <div id="physical-content" class="tab-content">
+                <!-- AI Setup Section -->
+                <div id="ai-setup" class="mb-8">
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center">
+                            🤖 AI Personal Trainer & Nutritionist
+                        </h3>
+                        <p class="mb-4">Get personalized workout and meal plans tailored just for you!</p>
+                        <button onclick="showAISetup()"
+                            class="bg-white text-purple-600 hover:bg-gray-100 px-6 py-2 rounded-md font-medium transition-colors">
+                            Set Up My AI Plan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Setup Form -->
+                <div id="ai-setup-form" class="hidden mb-8">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Tell us about yourself</h3>
+                        <form id="fitness-profile-form" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                                    <input type="number" name="age" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                                        placeholder="25">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Weight (kg)</label>
+                                    <input type="number" name="weight" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                                        placeholder="70">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Height (cm)</label>
+                                    <input type="number" name="height" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                                        placeholder="175">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                                    <select name="gender" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Fitness Level</label>
+                                    <select name="fitnessLevel" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+                                        <option value="">Select Level</option>
+                                        <option value="beginner">Beginner</option>
+                                        <option value="intermediate">Intermediate</option>
+                                        <option value="advanced">Advanced</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Primary Goal</label>
+                                    <select name="goal" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+                                        <option value="">Select Goal</option>
+                                        <option value="weight_loss">Weight Loss</option>
+                                        <option value="muscle_gain">Muscle Gain</option>
+                                        <option value="endurance">Improve Endurance</option>
+                                        <option value="general_fitness">General Fitness</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Dietary Preferences</label>
+                                <select name="diet" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+                                    <option value="">Select Diet Type</option>
+                                    <option value="omnivore">Omnivore</option>
+                                    <option value="vegetarian">Vegetarian</option>
+                                    <option value="vegan">Vegan</option>
+                                    <option value="keto">Keto</option>
+                                    <option value="mediterranean">Mediterranean</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Available Workout Days per
+                                    Week</label>
+                                <select name="workoutDays" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+                                    <option value="">Select Days</option>
+                                    <option value="3">3 days</option>
+                                    <option value="4">4 days</option>
+                                    <option value="5">5 days</option>
+                                    <option value="6">6 days</option>
+                                    <option value="7">7 days</option>
+                                </select>
+                            </div>
+                            <button type="submit"
+                                class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 px-4 rounded-md font-medium transition-colors">
+                                Generate My AI Plan 🚀
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- AI Generated Plans -->
+                <div id="ai-plans" class="hidden">
+                    <!-- Weekly Workout Plan -->
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 flex items-center">
+                                💪 Your Weekly Workout Plan
+                            </h3>
+                            <button onclick="regenerateWorkoutPlan()"
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm transition-colors">
+                                Regenerate Plan
+                            </button>
+                        </div>
+                        <div id="workout-plan" class="space-y-4"></div>
+                    </div>
+
+                    <!-- Daily Meal Plan -->
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 flex items-center">
+                                🍽️ Your Daily Meal Plan
+                            </h3>
+                            <div class="flex space-x-2">
+                                <select id="meal-day-selector" onchange="showMealPlan(this.value)"
+                                    class="px-3 py-1 border border-gray-300 rounded-md text-sm">
+                                    <option value="monday">Monday</option>
+                                    <option value="tuesday">Tuesday</option>
+                                    <option value="wednesday">Wednesday</option>
+                                    <option value="thursday">Thursday</option>
+                                    <option value="friday">Friday</option>
+                                    <option value="saturday">Saturday</option>
+                                    <option value="sunday">Sunday</option>
+                                </select>
+                                <button onclick="regenerateMealPlan()"
+                                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm transition-colors">
+                                    New Meals
+                                </button>
+                            </div>
+                        </div>
+                        <div id="meal-plan" class="space-y-4"></div>
+                    </div>
+
+                    <!-- Progress Tracking -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Weekly Progress Tracker</h3>
+                        <div class="grid grid-cols-7 gap-2 mb-4">
+                            <div class="text-center text-sm font-medium text-gray-600">Mon</div>
+                            <div class="text-center text-sm font-medium text-gray-600">Tue</div>
+                            <div class="text-center text-sm font-medium text-gray-600">Wed</div>
+                            <div class="text-center text-sm font-medium text-gray-600">Thu</div>
+                            <div class="text-center text-sm font-medium text-gray-600">Fri</div>
+                            <div class="text-center text-sm font-medium text-gray-600">Sat</div>
+                            <div class="text-center text-sm font-medium text-gray-600">Sun</div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-2 mb-4">
+                            <button onclick="toggleWorkout(this, 0)"
+                                class="h-12 bg-gray-200 hover:bg-green-500 hover:text-white rounded-md transition-colors text-sm">Workout</button>
+                            <button onclick="toggleWorkout(this, 1)"
+                                class="h-12 bg-gray-200 hover:bg-green-500 hover:text-white rounded-md transition-colors text-sm">Workout</button>
+                            <button onclick="toggleWorkout(this, 2)"
+                                class="h-12 bg-gray-200 hover:bg-green-500 hover:text-white rounded-md transition-colors text-sm">Workout</button>
+                            <button onclick="toggleWorkout(this, 3)"
+                                class="h-12 bg-gray-200 hover:bg-green-500 hover:text-white rounded-md transition-colors text-sm">Workout</button>
+                            <button onclick="toggleWorkout(this, 4)"
+                                class="h-12 bg-gray-200 hover:bg-green-500 hover:text-white rounded-md transition-colors text-sm">Workout</button>
+                            <button onclick="toggleWorkout(this, 5)"
+                                class="h-12 bg-gray-200 hover:bg-green-500 hover:text-white rounded-md transition-colors text-sm">Workout</button>
+                            <button onclick="toggleWorkout(this, 6)"
+                                class="h-12 bg-gray-200 hover:bg-green-500 hover:text-white rounded-md transition-colors text-sm">Workout</button>
+                        </div>
+                        <div class="grid grid-cols-7 gap-2">
+                            <button onclick="toggleMeal(this, 0)"
+                                class="h-12 bg-gray-200 hover:bg-blue-500 hover:text-white rounded-md transition-colors text-sm">Meals</button>
+                            <button onclick="toggleMeal(this, 1)"
+                                class="h-12 bg-gray-200 hover:bg-blue-500 hover:text-white rounded-md transition-colors text-sm">Meals</button>
+                            <button onclick="toggleMeal(this, 2)"
+                                class="h-12 bg-gray-200 hover:bg-blue-500 hover:text-white rounded-md transition-colors text-sm">Meals</button>
+                            <button onclick="toggleMeal(this, 3)"
+                                class="h-12 bg-gray-200 hover:bg-blue-500 hover:text-white rounded-md transition-colors text-sm">Meals</button>
+                            <button onclick="toggleMeal(this, 4)"
+                                class="h-12 bg-gray-200 hover:bg-blue-500 hover:text-white rounded-md transition-colors text-sm">Meals</button>
+                            <button onclick="toggleMeal(this, 5)"
+                                class="h-12 bg-gray-200 hover:bg-blue-500 hover:text-white rounded-md transition-colors text-sm">Meals</button>
+                            <button onclick="toggleMeal(this, 6)"
+                                class="h-12 bg-gray-200 hover:bg-blue-500 hover:text-white rounded-md transition-colors text-sm">Meals</button>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <div id="progress-stats" class="text-sm text-gray-600"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mental Health Tab -->
+            <div id="mental-content" class="tab-content hidden">
+                <!-- AI Psychology Articles Section -->
+                <div class="mb-8">
+                    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center">
+                            🧠 AI Psychology Assistant
+                        </h3>
+                        <p class="mb-4">Get personalized articles from renowned psychologists based on your current
+                            concerns</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <button onclick="filterArticles('anxiety')"
+                                class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-md text-sm transition-colors">Anxiety</button>
+                            <button onclick="filterArticles('depression')"
+                                class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-md text-sm transition-colors">Depression</button>
+                            <button onclick="filterArticles('stress')"
+                                class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-md text-sm transition-colors">Stress</button>
+                            <button onclick="filterArticles('relationships')"
+                                class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-md text-sm transition-colors">Relationships</button>
+                            <button onclick="filterArticles('self_esteem')"
+                                class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-md text-sm transition-colors">Self-Esteem</button>
+                            <button onclick="filterArticles('academic')"
+                                class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-md text-sm transition-colors">Academic
+                                Pressure</button>
+                            <button onclick="filterArticles('sleep')"
+                                class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-md text-sm transition-colors">Sleep
+                                Issues</button>
+                            <button onclick="filterArticles('all')"
+                                class="bg-white text-indigo-600 hover:bg-gray-100 px-4 py-2 rounded-md text-sm transition-colors font-medium">View
+                                All</button>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <input type="text" id="article-search" placeholder="Describe what you're going through..."
+                                class="flex-1 px-4 py-2 rounded-md text-gray-900 placeholder-gray-500">
+                            <button onclick="searchArticles()"
+                                class="bg-white text-indigo-600 hover:bg-gray-100 px-6 py-2 rounded-md font-medium transition-colors">
+                                Find Help
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Articles Display -->
+                <div id="psychology-articles" class="mb-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="articles-container">
+                        <!-- Articles will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Article Modal -->
+                <div id="article-modal"
+                    class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                    <div class="bg-white rounded-lg max-w-4xl max-h-full overflow-y-auto">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h2 id="modal-title" class="text-2xl font-bold text-gray-900 mb-2"></h2>
+                                    <p id="modal-author" class="text-indigo-600 font-medium"></p>
+                                </div>
+                                <button onclick="closeArticleModal()"
+                                    class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                            </div>
+                            <div id="modal-content" class="prose max-w-none text-gray-700 leading-relaxed"></div>
+                            <div class="mt-6 pt-4 border-t border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+                                    <div class="text-sm text-gray-500" id="modal-read-time"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Mental Health Chatbot -->
+                <div class="bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-lg shadow-lg p-6 mb-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2 flex items-center">
+                                🤖 AI Mental Health Support
+                            </h3>
+                            <p class="text-teal-100">24/7 AI companion with live sources from trusted mental health
+                                organizations</p>
+                        </div>
+                        <div class="text-4xl">💙</div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="chatbot-toggle" onclick="toggleChatbot()"
+                            class="bg-white text-teal-600 hover:bg-gray-100 px-6 py-2 rounded-md font-medium transition-colors">
+                            Start Chat
+                        </button>
+                        <div class="text-sm text-teal-100">
+                            ✓ Evidence-based responses ✓ Live sources ✓ Crisis resources
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chatbot Interface -->
+                <div id="chatbot-interface" class="hidden bg-white rounded-lg shadow-lg mb-8">
+                    <div class="bg-gradient-to-r from-teal-600 to-cyan-600 text-white p-4 rounded-t-lg">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <span class="text-lg">🤖</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">AI Mental Health Assistant</h4>
+                                    <p class="text-sm text-teal-100">Online • Ready to help</p>
+                                </div>
+                            </div>
+                            <button onclick="toggleChatbot()" class="text-white hover:text-gray-200 text-xl">×</button>
+                        </div>
+                    </div>
+
+                    <div id="chat-messages" class="h-96 overflow-y-auto p-4 space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div
+                                class="w-8 h-8 bg-teal-600 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                                AI</div>
+                            <div class="flex-1">
+                                <div class="bg-gray-100 rounded-lg p-3">
+                                    <p class="text-gray-800">Hello! I'm your AI mental health companion. I'm here to
+                                        provide support, evidence-based techniques, and connect you with trusted
+                                        resources. How are you feeling today?</p>
+                                    <div class="mt-3 p-3 bg-blue-50 rounded-lg">
+                                        <p class="text-sm font-medium text-blue-800 mb-2">📚 I can help with:</p>
+                                        <ul class="text-sm text-blue-700 space-y-1">
+                                            <li>• Anxiety and stress management</li>
+                                            <li>• Depression support and coping strategies</li>
+                                            <li>• Sleep issues and insomnia</li>
+                                            <li>• Academic pressure and study stress</li>
+                                            <li>• Relationship concerns</li>
+                                            <li>• Self-esteem and confidence building</li>
+                                        </ul>
+                                    </div>
+                                    <div class="mt-3 flex flex-wrap gap-2">
+                                        <button onclick="quickResponse('I feel anxious')"
+                                            class="px-3 py-1 bg-teal-100 hover:bg-teal-200 text-teal-700 text-sm rounded-full transition-colors">I
+                                            feel anxious</button>
+                                        <button onclick="quickResponse('I am stressed about exams')"
+                                            class="px-3 py-1 bg-teal-100 hover:bg-teal-200 text-teal-700 text-sm rounded-full transition-colors">I'm
+                                            stressed about exams</button>
+                                        <button onclick="quickResponse('I cannot sleep well')"
+                                            class="px-3 py-1 bg-teal-100 hover:bg-teal-200 text-teal-700 text-sm rounded-full transition-colors">I
+                                            can't sleep well</button>
+                                        <button onclick="quickResponse('I feel sad lately')"
+                                            class="px-3 py-1 bg-teal-100 hover:bg-teal-200 text-teal-700 text-sm rounded-full transition-colors">I
+                                            feel sad lately</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-200 p-4">
+                        <div class="flex items-center space-x-2">
+                            <input type="text" id="chat-input" placeholder="Type your message here..."
+                                class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                                onkeypress="handleChatKeyPress(event)">
+                            <button onclick="sendMessage()"
+                                class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-lg transition-colors">
+                                Send
+                            </button>
+                        </div>
+                        <div class="mt-2 text-xs text-gray-500 text-center">
+                            🔒 This is a supportive AI tool. For emergencies, call 988 (Suicide & Crisis Lifeline)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Counseling Services -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                            🗣️ Counseling Services
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-semibold">Individual Counseling</h4>
+                                <p class="text-gray-600">One-on-one sessions with licensed counselors</p>
+                            </div>
+                            <div class="border-l-4 border-pink-500 pl-4">
+                                <h4 class="font-semibold">Group Therapy</h4>
+                                <p class="text-gray-600">Support groups for various topics</p>
+                            </div>
+                            <button
+                                class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-md transition-colors">Schedule
+                                Appointment</button>
+                        </div>
+                    </div>
+
+                    <!-- Mindfulness Section -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                            🧘‍♀️ Mindfulness & Meditation
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-teal-500 pl-4">
+                                <h4 class="font-semibold">Daily Meditation</h4>
+                                <p class="text-gray-600">Guided sessions every morning at 8 AM</p>
+                            </div>
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <h4 class="font-semibold">Stress Management</h4>
+                                <p class="text-gray-600">Workshops on coping strategies</p>
+                            </div>
+                            <button
+                                class="w-full bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded-md transition-colors">Start
+                                Meditation</button>
+                        </div>
+                    </div>
+
+                    <!-- Mood Tracker -->
+                    <div class="bg-white rounded-lg shadow-md p-6 lg:col-span-2">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">😊 Daily Mood Tracker</h3>
+                        <p class="text-gray-600 mb-4">How are you feeling today?</p>
+                        <div class="flex justify-center space-x-4 mb-6">
+                            <button onclick="setMood(this, '😢')"
+                                class="text-4xl p-2 rounded-lg hover:bg-gray-100 transition-colors">😢</button>
+                            <button onclick="setMood(this, '😐')"
+                                class="text-4xl p-2 rounded-lg hover:bg-gray-100 transition-colors">😐</button>
+                            <button onclick="setMood(this, '🙂')"
+                                class="text-4xl p-2 rounded-lg hover:bg-gray-100 transition-colors">🙂</button>
+                            <button onclick="setMood(this, '😊')"
+                                class="text-4xl p-2 rounded-lg hover:bg-gray-100 transition-colors">😊</button>
+                            <button onclick="setMood(this, '😄')"
+                                class="text-4xl p-2 rounded-lg hover:bg-gray-100 transition-colors">😄</button>
+                        </div>
+                        <div id="mood-message" class="text-center text-gray-600"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources Tab -->
+            <div id="resources-content" class="tab-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <div class="text-3xl mb-4">🏥</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Health Center</h3>
+                        <p class="text-gray-600 mb-4">Medical services and health screenings</p>
+                        <p class="text-sm text-gray-500">📞 (555) 123-4567</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <div class="text-3xl mb-4">🚨</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Crisis Hotline</h3>
+                        <p class="text-gray-600 mb-4">24/7 emergency mental health support</p>
+                        <p class="text-sm text-gray-500">📞 (555) 911-HELP</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <div class="text-3xl mb-4">💊</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Pharmacy</h3>
+                        <p class="text-gray-600 mb-4">Prescription and over-the-counter medications</p>
+                        <p class="text-sm text-gray-500">📞 (555) 123-MEDS</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <div class="text-3xl mb-4">🍎</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Nutrition Services</h3>
+                        <p class="text-gray-600 mb-4">Dietary consultations and meal planning</p>
+                        <p class="text-sm text-gray-500">📞 (555) 123-FOOD</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <div class="text-3xl mb-4">🏃‍♂️</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Recreation Center</h3>
+                        <p class="text-gray-600 mb-4">Sports facilities and fitness programs</p>
+                        <p class="text-sm text-gray-500">📞 (555) 123-MOVE</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <div class="text-3xl mb-4">📚</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Wellness Library</h3>
+                        <p class="text-gray-600 mb-4">Health education resources and materials</p>
+                        <p class="text-sm text-gray-500">📞 (555) 123-READ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // User management
+        let users = JSON.parse(localStorage.getItem('wellnessUsers') || '[]');
+        let currentUser = JSON.parse(localStorage.getItem('currentWellnessUser') || 'null');
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function () {
+            if (currentUser) {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+        });
+
+        // Navigation functions
+        function showLogin() {
+            document.getElementById('login-section').classList.remove('hidden');
+            document.getElementById('register-section').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+        }
+
+        function showRegister() {
+            document.getElementById('register-section').classList.remove('hidden');
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+        }
+
+        function showDashboard() {
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('register-section').classList.add('hidden');
+            document.getElementById('nav-buttons').classList.add('hidden');
+            document.getElementById('user-menu').classList.remove('hidden');
+            document.getElementById('welcome-text').textContent = `Welcome, ${currentUser.name}!`;
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentWellnessUser');
+            document.getElementById('nav-buttons').classList.remove('hidden');
+            document.getElementById('user-menu').classList.add('hidden');
+            showLogin();
+        }
+
+        // Form handlers
+        document.getElementById('register-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const userData = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                studentId: formData.get('studentId'),
+                password: formData.get('password'),
+                id: Date.now()
+            };
+
+            // Check if user already exists
+            if (users.find(user => user.email === userData.email)) {
+                alert('An account with this email already exists!');
+                return;
+            }
+
+            users.push(userData);
+            localStorage.setItem('wellnessUsers', JSON.stringify(users));
+            alert('Registration successful! Please log in.');
+            showLogin();
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const email = formData.get('email');
+            const password = formData.get('password');
+
+            console.log('Login attempt:', email); // Debug log
+            console.log('Registered users:', users); // Debug log
+
+            // Check if user exists with this email
+            const userExists = users.find(u => u.email === email);
+
+            if (!userExists) {
+                alert('❌ No account found with this email address.\n\nPlease register first by clicking "Register here" below!');
+                return;
+            }
+
+            // Check if password matches
+            if (userExists.password === password) {
+                currentUser = userExists;
+                localStorage.setItem('currentWellnessUser', JSON.stringify(userExists));
+                alert('✅ Login successful! Welcome back!');
+                showDashboard();
+            } else {
+                alert('❌ Incorrect password. Please try again!');
+            }
+        });
+
+        // Tab navigation
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('[id$="-tab"]').forEach(tab => {
+                tab.classList.remove('bg-purple-600', 'text-white');
+                tab.classList.add('text-gray-600', 'hover:text-gray-900');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName + '-content').classList.remove('hidden');
+
+            // Add active class to selected tab
+            const activeTab = document.getElementById(tabName + '-tab');
+            activeTab.classList.add('bg-purple-600', 'text-white');
+            activeTab.classList.remove('text-gray-600', 'hover:text-gray-900');
+        }
+
+        // AI Fitness System
+        let userProfile = JSON.parse(localStorage.getItem('fitnessProfile') || 'null');
+        let workoutPlans = {};
+        let mealPlans = {};
+        let weeklyProgress = JSON.parse(localStorage.getItem('weeklyProgress') || '{"workouts": [false,false,false,false,false,false,false], "meals": [false,false,false,false,false,false,false]}');
+
+        // AI Setup Functions
+        function showAISetup() {
+            document.getElementById('ai-setup-form').classList.remove('hidden');
+            document.getElementById('ai-setup').classList.add('hidden');
+        }
+
+        // Form handler for fitness profile
+        document.getElementById('fitness-profile-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            userProfile = {
+                age: parseInt(formData.get('age')),
+                weight: parseInt(formData.get('weight')),
+                height: parseInt(formData.get('height')),
+                gender: formData.get('gender'),
+                fitnessLevel: formData.get('fitnessLevel'),
+                goal: formData.get('goal'),
+                diet: formData.get('diet'),
+                workoutDays: parseInt(formData.get('workoutDays'))
+            };
+
+            localStorage.setItem('fitnessProfile', JSON.stringify(userProfile));
+            generateAIPlans();
+            showAIPlans();
+        });
+
+        function showAIPlans() {
+            document.getElementById('ai-setup-form').classList.add('hidden');
+            document.getElementById('ai-plans').classList.remove('hidden');
+            updateProgressStats();
+        }
+
+        // AI Plan Generation
+        function generateAIPlans() {
+            generateWorkoutPlan();
+            generateMealPlans();
+        }
+
+        function generateWorkoutPlan() {
+            const workouts = getWorkoutsByLevel();
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            const workoutPlan = [];
+
+            for (let i = 0; i < userProfile.workoutDays; i++) {
+                const dayIndex = i % 7;
+                const workoutType = getWorkoutForDay(i, userProfile.goal);
+                workoutPlan.push({
+                    day: days[dayIndex],
+                    type: workoutType.name,
+                    exercises: workoutType.exercises,
+                    duration: workoutType.duration
+                });
+            }
+
+            workoutPlans.current = workoutPlan;
+            displayWorkoutPlan();
+        }
+
+        function getWorkoutsByLevel() {
+            const workouts = {
+                beginner: {
+                    strength: {
+                        name: "Beginner Strength",
+                        exercises: ["Push-ups (3x8)", "Bodyweight Squats (3x10)", "Plank (3x30s)", "Lunges (3x8 each leg)"],
+                        duration: "30 minutes"
+                    },
+                    cardio: {
+                        name: "Light Cardio",
+                        exercises: ["Brisk Walking (20 min)", "Jumping Jacks (3x30s)", "Step-ups (3x10)", "Stretching (10 min)"],
+                        duration: "40 minutes"
+                    },
+                    flexibility: {
+                        name: "Flexibility & Recovery",
+                        exercises: ["Full Body Stretch (15 min)", "Yoga Flow (20 min)", "Deep Breathing (5 min)"],
+                        duration: "40 minutes"
+                    }
+                },
+                intermediate: {
+                    strength: {
+                        name: "Intermediate Strength",
+                        exercises: ["Push-ups (4x12)", "Squats (4x15)", "Plank (3x45s)", "Burpees (3x8)", "Mountain Climbers (3x20)"],
+                        duration: "45 minutes"
+                    },
+                    cardio: {
+                        name: "Moderate Cardio",
+                        exercises: ["Running (25 min)", "High Knees (4x30s)", "Jump Squats (4x10)", "Cool Down Walk (10 min)"],
+                        duration: "50 minutes"
+                    },
+                    flexibility: {
+                        name: "Active Recovery",
+                        exercises: ["Dynamic Stretching (10 min)", "Yoga Flow (25 min)", "Foam Rolling (10 min)"],
+                        duration: "45 minutes"
+                    }
+                },
+                advanced: {
+                    strength: {
+                        name: "Advanced Strength",
+                        exercises: ["Push-ups (5x15)", "Jump Squats (5x12)", "Plank to Push-up (4x10)", "Burpees (4x12)", "Sprint Intervals (5x30s)"],
+                        duration: "60 minutes"
+                    },
+                    cardio: {
+                        name: "High Intensity Cardio",
+                        exercises: ["HIIT Running (30 min)", "Box Jumps (5x10)", "Battle Ropes (4x45s)", "Cool Down (10 min)"],
+                        duration: "60 minutes"
+                    },
+                    flexibility: {
+                        name: "Recovery & Mobility",
+                        exercises: ["Advanced Yoga (30 min)", "Deep Stretching (15 min)", "Meditation (10 min)"],
+                        duration: "55 minutes"
+                    }
+                }
+            };
+            return workouts[userProfile.fitnessLevel];
+        }
+
+        function getWorkoutForDay(dayIndex, goal) {
+            const workouts = getWorkoutsByLevel();
+            const patterns = {
+                weight_loss: ['cardio', 'strength', 'cardio', 'flexibility', 'cardio', 'strength', 'flexibility'],
+                muscle_gain: ['strength', 'strength', 'flexibility', 'strength', 'cardio', 'strength', 'flexibility'],
+                endurance: ['cardio', 'strength', 'cardio', 'flexibility', 'cardio', 'strength', 'cardio'],
+                general_fitness: ['strength', 'cardio', 'flexibility', 'strength', 'cardio', 'flexibility', 'cardio']
+            };
+
+            const pattern = patterns[goal] || patterns.general_fitness;
+            const workoutType = pattern[dayIndex % pattern.length];
+            return workouts[workoutType];
+        }
+
+        function displayWorkoutPlan() {
+            const container = document.getElementById('workout-plan');
+            container.innerHTML = '';
+
+            workoutPlans.current.forEach((workout, index) => {
+                const workoutDiv = document.createElement('div');
+                workoutDiv.className = 'border border-gray-200 rounded-lg p-4';
+                workoutDiv.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-semibold text-lg">${workout.day} - ${workout.type}</h4>
+                        <span class="text-sm text-gray-500">${workout.duration}</span>
+                    </div>
+                    <ul class="space-y-1">
+                        ${workout.exercises.map(exercise => `<li class="text-gray-600">• ${exercise}</li>`).join('')}
+                    </ul>
+                `;
+                container.appendChild(workoutDiv);
+            });
+        }
+
+        function generateMealPlans() {
+            const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+            days.forEach(day => {
+                mealPlans[day] = generateDayMealPlan();
+            });
+            showMealPlan('monday');
+        }
+
+        function generateDayMealPlan() {
+            const mealOptions = getMealOptionsByDiet();
+            return {
+                breakfast: getRandomMeal(mealOptions.breakfast),
+                lunch: getRandomMeal(mealOptions.lunch),
+                dinner: getRandomMeal(mealOptions.dinner),
+                snacks: [getRandomMeal(mealOptions.snacks), getRandomMeal(mealOptions.snacks)]
+            };
+        }
+
+        function getMealOptionsByDiet() {
+            const meals = {
+                omnivore: {
+                    breakfast: [
+                        { name: "Scrambled Eggs with Toast", calories: 350, protein: "22g" },
+                        { name: "Greek Yogurt with Berries", calories: 280, protein: "20g" },
+                        { name: "Oatmeal with Banana", calories: 320, protein: "12g" },
+                        { name: "Protein Smoothie", calories: 300, protein: "25g" }
+                    ],
+                    lunch: [
+                        { name: "Grilled Chicken Salad", calories: 450, protein: "35g" },
+                        { name: "Turkey Sandwich", calories: 420, protein: "28g" },
+                        { name: "Quinoa Bowl with Vegetables", calories: 380, protein: "18g" },
+                        { name: "Salmon with Rice", calories: 520, protein: "40g" }
+                    ],
+                    dinner: [
+                        { name: "Lean Beef with Sweet Potato", calories: 580, protein: "45g" },
+                        { name: "Grilled Fish with Vegetables", calories: 480, protein: "38g" },
+                        { name: "Chicken Stir-fry", calories: 450, protein: "35g" },
+                        { name: "Pasta with Lean Meat Sauce", calories: 520, protein: "32g" }
+                    ],
+                    snacks: [
+                        { name: "Apple with Peanut Butter", calories: 190, protein: "8g" },
+                        { name: "Greek Yogurt", calories: 150, protein: "15g" },
+                        { name: "Mixed Nuts", calories: 200, protein: "6g" },
+                        { name: "Protein Bar", calories: 220, protein: "20g" }
+                    ]
+                },
+                vegetarian: {
+                    breakfast: [
+                        { name: "Veggie Scramble with Toast", calories: 320, protein: "18g" },
+                        { name: "Greek Yogurt with Granola", calories: 300, protein: "18g" },
+                        { name: "Avocado Toast", calories: 280, protein: "12g" },
+                        { name: "Protein Smoothie Bowl", calories: 350, protein: "22g" }
+                    ],
+                    lunch: [
+                        { name: "Quinoa Buddha Bowl", calories: 420, protein: "20g" },
+                        { name: "Veggie Wrap", calories: 380, protein: "16g" },
+                        { name: "Lentil Soup with Bread", calories: 400, protein: "22g" },
+                        { name: "Caprese Salad with Chickpeas", calories: 360, protein: "18g" }
+                    ],
+                    dinner: [
+                        { name: "Black Bean Tacos", calories: 480, protein: "24g" },
+                        { name: "Vegetable Curry with Rice", calories: 450, protein: "18g" },
+                        { name: "Stuffed Bell Peppers", calories: 380, protein: "20g" },
+                        { name: "Pasta Primavera", calories: 420, protein: "16g" }
+                    ],
+                    snacks: [
+                        { name: "Hummus with Veggies", calories: 150, protein: "6g" },
+                        { name: "Trail Mix", calories: 180, protein: "5g" },
+                        { name: "Cheese and Crackers", calories: 200, protein: "8g" },
+                        { name: "Fruit Smoothie", calories: 160, protein: "4g" }
+                    ]
+                },
+                vegan: {
+                    breakfast: [
+                        { name: "Tofu Scramble", calories: 280, protein: "20g" },
+                        { name: "Oatmeal with Nuts", calories: 320, protein: "12g" },
+                        { name: "Smoothie Bowl", calories: 300, protein: "15g" },
+                        { name: "Avocado Toast with Seeds", calories: 290, protein: "10g" }
+                    ],
+                    lunch: [
+                        { name: "Buddha Bowl", calories: 400, protein: "18g" },
+                        { name: "Lentil Salad", calories: 380, protein: "20g" },
+                        { name: "Veggie Burger", calories: 420, protein: "22g" },
+                        { name: "Chickpea Curry", calories: 450, protein: "24g" }
+                    ],
+                    dinner: [
+                        { name: "Tofu Stir-fry", calories: 380, protein: "25g" },
+                        { name: "Bean and Rice Bowl", calories: 420, protein: "20g" },
+                        { name: "Vegetable Pasta", calories: 400, protein: "16g" },
+                        { name: "Stuffed Portobello", calories: 320, protein: "18g" }
+                    ],
+                    snacks: [
+                        { name: "Nuts and Seeds", calories: 200, protein: "8g" },
+                        { name: "Fruit with Nut Butter", calories: 180, protein: "6g" },
+                        { name: "Veggie Chips", calories: 140, protein: "3g" },
+                        { name: "Plant Protein Bar", calories: 210, protein: "18g" }
+                    ]
+                }
+            };
+
+            return meals[userProfile.diet] || meals.omnivore;
+        }
+
+        function getRandomMeal(mealArray) {
+            return mealArray[Math.floor(Math.random() * mealArray.length)];
+        }
+
+        function showMealPlan(day) {
+            const container = document.getElementById('meal-plan');
+            const dayPlan = mealPlans[day];
+
+            if (!dayPlan) return;
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h4 class="font-semibold text-lg mb-2 flex items-center">🌅 Breakfast</h4>
+                        <div class="text-gray-700">
+                            <p class="font-medium">${dayPlan.breakfast.name}</p>
+                            <p class="text-sm text-gray-500">${dayPlan.breakfast.calories} cal • ${dayPlan.breakfast.protein} protein</p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h4 class="font-semibold text-lg mb-2 flex items-center">🌞 Lunch</h4>
+                        <div class="text-gray-700">
+                            <p class="font-medium">${dayPlan.lunch.name}</p>
+                            <p class="text-sm text-gray-500">${dayPlan.lunch.calories} cal • ${dayPlan.lunch.protein} protein</p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h4 class="font-semibold text-lg mb-2 flex items-center">🌙 Dinner</h4>
+                        <div class="text-gray-700">
+                            <p class="font-medium">${dayPlan.dinner.name}</p>
+                            <p class="text-sm text-gray-500">${dayPlan.dinner.calories} cal • ${dayPlan.dinner.protein} protein</p>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h4 class="font-semibold text-lg mb-2 flex items-center">🍎 Snacks</h4>
+                        <div class="text-gray-700 space-y-2">
+                            ${dayPlan.snacks.map(snack => `
+                                <div>
+                                    <p class="font-medium">${snack.name}</p>
+                                    <p class="text-sm text-gray-500">${snack.calories} cal • ${snack.protein} protein</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function regenerateWorkoutPlan() {
+            generateWorkoutPlan();
+            alert('🔄 New workout plan generated! Your AI trainer has created fresh exercises for you.');
+        }
+
+        function regenerateMealPlan() {
+            const currentDay = document.getElementById('meal-day-selector').value;
+            mealPlans[currentDay] = generateDayMealPlan();
+            showMealPlan(currentDay);
+            alert('🍽️ New meal plan generated! Your AI nutritionist has prepared fresh meal ideas.');
+        }
+
+        // Progress Tracking
+        function toggleWorkout(button, dayIndex) {
+            weeklyProgress.workouts[dayIndex] = !weeklyProgress.workouts[dayIndex];
+
+            if (weeklyProgress.workouts[dayIndex]) {
+                button.classList.add('bg-green-500', 'text-white');
+                button.classList.remove('bg-gray-200');
+            } else {
+                button.classList.remove('bg-green-500', 'text-white');
+                button.classList.add('bg-gray-200');
+            }
+
+            localStorage.setItem('weeklyProgress', JSON.stringify(weeklyProgress));
+            updateProgressStats();
+        }
+
+        function toggleMeal(button, dayIndex) {
+            weeklyProgress.meals[dayIndex] = !weeklyProgress.meals[dayIndex];
+
+            if (weeklyProgress.meals[dayIndex]) {
+                button.classList.add('bg-blue-500', 'text-white');
+                button.classList.remove('bg-gray-200');
+            } else {
+                button.classList.remove('bg-blue-500', 'text-white');
+                button.classList.add('bg-gray-200');
+            }
+
+            localStorage.setItem('weeklyProgress', JSON.stringify(weeklyProgress));
+            updateProgressStats();
+        }
+
+        function updateProgressStats() {
+            const workoutCount = weeklyProgress.workouts.filter(w => w).length;
+            const mealCount = weeklyProgress.meals.filter(m => m).length;
+            const workoutPercent = Math.round((workoutCount / 7) * 100);
+            const mealPercent = Math.round((mealCount / 7) * 100);
+
+            document.getElementById('progress-stats').innerHTML = `
+                <div class="flex justify-center space-x-8">
+                    <div class="text-center">
+                        <div class="text-lg font-bold text-green-600">${workoutCount}/7</div>
+                        <div class="text-xs">Workouts (${workoutPercent}%)</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-lg font-bold text-blue-600">${mealCount}/7</div>
+                        <div class="text-xs">Meal Plans (${mealPercent}%)</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize AI system if profile exists
+        document.addEventListener('DOMContentLoaded', function () {
+            if (userProfile) {
+                generateAIPlans();
+                document.getElementById('ai-setup').classList.add('hidden');
+                document.getElementById('ai-plans').classList.remove('hidden');
+
+                // Restore progress state
+                weeklyProgress.workouts.forEach((completed, index) => {
+                    const button = document.querySelector(`[onclick="toggleWorkout(this, ${index})"]`);
+                    if (button && completed) {
+                        button.classList.add('bg-green-500', 'text-white');
+                        button.classList.remove('bg-gray-200');
+                    }
+                });
+
+                weeklyProgress.meals.forEach((completed, index) => {
+                    const button = document.querySelector(`[onclick="toggleMeal(this, ${index})"]`);
+                    if (button && completed) {
+                        button.classList.add('bg-blue-500', 'text-white');
+                        button.classList.remove('bg-gray-200');
+                    }
+                });
+
+                updateProgressStats();
+            }
+        });
+
+        // Psychology Articles Database
+        const psychologyArticles = [
+            {
+                id: 1,
+                title: "Understanding Anxiety: A Cognitive Behavioral Approach",
+                author: "Dr. Aaron Beck",
+                category: "anxiety",
+                tags: ["anxiety", "CBT", "coping"],
+                readTime: "8 min read",
+                summary: "Learn how cognitive behavioral therapy can help you understand and manage anxiety through practical techniques.",
+                content: `
+                    <h3>What is Anxiety?</h3>
+                    <p>Anxiety is a natural human response to perceived threats, but when it becomes overwhelming, it can significantly impact our daily lives. Dr. Aaron Beck, the founder of cognitive behavioral therapy, has shown us that our thoughts, feelings, and behaviors are interconnected.</p>
+                    
+                    <h3>The Cognitive Triangle</h3>
+                    <p>Beck's cognitive triangle demonstrates how our thoughts influence our emotions and behaviors. When we have anxious thoughts like "I'm going to fail this exam," our body responds with physical symptoms of anxiety, and we might engage in avoidance behaviors.</p>
+                    
+                    <h3>Practical Techniques</h3>
+                    <ul>
+                        <li><strong>Thought Challenging:</strong> Question the evidence for your anxious thoughts. Ask yourself, "Is this thought realistic? What would I tell a friend in this situation?"</li>
+                        <li><strong>Behavioral Experiments:</strong> Test your anxious predictions by gradually facing feared situations in a controlled way.</li>
+                        <li><strong>Mindfulness:</strong> Practice staying present rather than worrying about future events.</li>
+                    </ul>
+                    
+                    <h3>Building Resilience</h3>
+                    <p>Remember that overcoming anxiety is a process. Be patient with yourself and celebrate small victories. Each time you challenge an anxious thought or face a fear, you're building resilience and confidence.</p>
+                `
+            },
+            {
+                id: 2,
+                title: "Breaking Free from Depression: The Power of Behavioral Activation",
+                author: "Dr. Martin Seligman",
+                category: "depression",
+                tags: ["depression", "behavioral activation", "positive psychology"],
+                readTime: "10 min read",
+                summary: "Discover how small behavioral changes can create significant improvements in mood and overall well-being.",
+                content: `
+                    <h3>Understanding Depression</h3>
+                    <p>Depression often creates a cycle where low mood leads to inactivity, which further worsens mood. Dr. Martin Seligman's research shows that we can break this cycle through behavioral activation.</p>
+                    
+                    <h3>The Activity-Mood Connection</h3>
+                    <p>When we're depressed, we tend to withdraw from activities that once brought us joy. This withdrawal, while understandable, actually maintains and worsens depression. The key is to gradually re-engage with meaningful activities.</p>
+                    
+                    <h3>Starting Small</h3>
+                    <ul>
+                        <li><strong>Daily Structure:</strong> Create a simple daily routine, even if it's just making your bed or having breakfast at the same time.</li>
+                        <li><strong>Pleasant Activities:</strong> Schedule one small pleasant activity each day, like listening to music or taking a short walk.</li>
+                        <li><strong>Social Connection:</strong> Reach out to one person, even if it's just sending a text message.</li>
+                    </ul>
+                    
+                    <h3>The Three Pillars of Well-being</h3>
+                    <p>Seligman's research identifies three key areas: positive emotions, engagement in activities, and meaning. Focus on incorporating elements from each area into your daily life, no matter how small.</p>
+                `
+            },
+            {
+                id: 3,
+                title: "Stress Management: The Transactional Model",
+                author: "Dr. Richard Lazarus",
+                category: "stress",
+                tags: ["stress", "coping", "appraisal"],
+                readTime: "7 min read",
+                summary: "Learn how your perception of stress affects your experience and discover effective coping strategies.",
+                content: `
+                    <h3>Stress as a Transaction</h3>
+                    <p>Dr. Richard Lazarus revolutionized our understanding of stress by showing that it's not just about what happens to us, but how we perceive and cope with events. Stress occurs when we perceive demands as exceeding our resources.</p>
+                    
+                    <h3>Primary and Secondary Appraisal</h3>
+                    <p>When faced with a potential stressor, we first assess whether it's threatening (primary appraisal), then evaluate our ability to cope (secondary appraisal). This process determines our stress response.</p>
+                    
+                    <h3>Coping Strategies</h3>
+                    <ul>
+                        <li><strong>Problem-focused coping:</strong> Directly addressing the source of stress through planning and action.</li>
+                        <li><strong>Emotion-focused coping:</strong> Managing emotional responses through relaxation, seeking support, or reframing thoughts.</li>
+                        <li><strong>Meaning-focused coping:</strong> Finding purpose or growth opportunities in stressful situations.</li>
+                    </ul>
+                    
+                    <h3>Building Your Coping Toolkit</h3>
+                    <p>Effective stress management involves having multiple strategies available. Practice different techniques when you're calm so they're readily available during stressful times.</p>
+                `
+            },
+            {
+                id: 4,
+                title: "Building Healthy Relationships: Attachment Theory in Practice",
+                author: "Dr. John Bowlby",
+                category: "relationships",
+                tags: ["relationships", "attachment", "communication"],
+                readTime: "9 min read",
+                summary: "Understand how early attachment patterns influence adult relationships and learn to build secure connections.",
+                content: `
+                    <h3>Understanding Attachment</h3>
+                    <p>Dr. John Bowlby's attachment theory shows that our early relationships shape how we connect with others throughout life. Understanding your attachment style can improve your relationships.</p>
+                    
+                    <h3>Attachment Styles</h3>
+                    <ul>
+                        <li><strong>Secure:</strong> Comfortable with intimacy and independence</li>
+                        <li><strong>Anxious:</strong> Seeks closeness but fears abandonment</li>
+                        <li><strong>Avoidant:</strong> Values independence, uncomfortable with closeness</li>
+                        <li><strong>Disorganized:</strong> Inconsistent patterns of relating</li>
+                    </ul>
+                    
+                    <h3>Building Security</h3>
+                    <p>Regardless of your attachment style, you can develop more secure relationships through:</p>
+                    <ul>
+                        <li>Open, honest communication</li>
+                        <li>Emotional regulation skills</li>
+                        <li>Empathy and understanding</li>
+                        <li>Consistent, reliable behavior</li>
+                    </ul>
+                    
+                    <h3>Healing Through Relationships</h3>
+                    <p>Secure relationships can help heal insecure attachment patterns. Focus on building trust gradually and communicating your needs clearly.</p>
+                `
+            },
+            {
+                id: 5,
+                title: "Self-Esteem: The Foundation of Mental Health",
+                author: "Dr. Nathaniel Branden",
+                category: "self_esteem",
+                tags: ["self-esteem", "self-worth", "confidence"],
+                readTime: "8 min read",
+                summary: "Explore the six pillars of self-esteem and learn practical ways to build genuine self-worth.",
+                content: `
+                    <h3>What is Self-Esteem?</h3>
+                    <p>Dr. Nathaniel Branden defines self-esteem as confidence in our ability to think and cope with life's challenges, and confidence in our right to be happy and successful.</p>
+                    
+                    <h3>The Six Pillars of Self-Esteem</h3>
+                    <ol>
+                        <li><strong>Living Consciously:</strong> Being aware and present in your life</li>
+                        <li><strong>Self-Acceptance:</strong> Accepting yourself as you are while working toward growth</li>
+                        <li><strong>Self-Responsibility:</strong> Taking ownership of your choices and actions</li>
+                        <li><strong>Self-Assertiveness:</strong> Expressing your authentic self</li>
+                        <li><strong>Living Purposefully:</strong> Setting and working toward meaningful goals</li>
+                        <li><strong>Personal Integrity:</strong> Aligning your actions with your values</li>
+                    </ol>
+                    
+                    <h3>Building Genuine Self-Worth</h3>
+                    <p>True self-esteem isn't about feeling superior to others or never making mistakes. It's about having a realistic, positive relationship with yourself based on self-knowledge and self-acceptance.</p>
+                    
+                    <h3>Daily Practices</h3>
+                    <ul>
+                        <li>Practice self-compassion when you make mistakes</li>
+                        <li>Acknowledge your accomplishments, no matter how small</li>
+                        <li>Set boundaries that honor your needs and values</li>
+                        <li>Challenge negative self-talk with evidence-based thinking</li>
+                    </ul>
+                `
+            },
+            {
+                id: 6,
+                title: "Academic Pressure: Finding Balance and Meaning",
+                author: "Dr. Carol Dweck",
+                category: "academic",
+                tags: ["academic pressure", "growth mindset", "motivation"],
+                readTime: "6 min read",
+                summary: "Learn how adopting a growth mindset can transform academic challenges into opportunities for learning.",
+                content: `
+                    <h3>The Pressure to Perform</h3>
+                    <p>Academic pressure is a common source of stress for students. Dr. Carol Dweck's research on mindset shows that how we think about intelligence and ability significantly impacts our academic experience.</p>
+                    
+                    <h3>Fixed vs. Growth Mindset</h3>
+                    <ul>
+                        <li><strong>Fixed Mindset:</strong> Believes abilities are static; fears failure as a reflection of inadequacy</li>
+                        <li><strong>Growth Mindset:</strong> Believes abilities can be developed; sees challenges as opportunities to learn</li>
+                    </ul>
+                    
+                    <h3>Transforming Academic Stress</h3>
+                    <p>Instead of focusing solely on grades or performance, shift your attention to:</p>
+                    <ul>
+                        <li>The learning process itself</li>
+                        <li>Effort and strategy over natural talent</li>
+                        <li>Progress over perfection</li>
+                        <li>Curiosity over compliance</li>
+                    </ul>
+                    
+                    <h3>Practical Strategies</h3>
+                    <ul>
+                        <li>Set learning goals alongside performance goals</li>
+                        <li>View mistakes as valuable feedback</li>
+                        <li>Celebrate effort and improvement</li>
+                        <li>Seek help as a sign of strength, not weakness</li>
+                    </ul>
+                `
+            },
+            {
+                id: 7,
+                title: "Sleep and Mental Health: The Bidirectional Relationship",
+                author: "Dr. Matthew Walker",
+                category: "sleep",
+                tags: ["sleep", "mental health", "circadian rhythm"],
+                readTime: "9 min read",
+                summary: "Understand the crucial connection between sleep and mental health, and learn strategies for better sleep hygiene.",
+                content: `
+                    <h3>Sleep as a Foundation</h3>
+                    <p>Dr. Matthew Walker's research reveals that sleep is not a luxury but a biological necessity. Poor sleep doesn't just make us tired—it significantly impacts our mental health, emotional regulation, and cognitive function.</p>
+                    
+                    <h3>The Sleep-Mental Health Connection</h3>
+                    <p>Sleep and mental health have a bidirectional relationship:</p>
+                    <ul>
+                        <li>Poor sleep increases risk of anxiety and depression</li>
+                        <li>Mental health issues can disrupt sleep patterns</li>
+                        <li>Improving sleep often improves mental health symptoms</li>
+                    </ul>
+                    
+                    <h3>Sleep Hygiene Principles</h3>
+                    <ul>
+                        <li><strong>Consistency:</strong> Go to bed and wake up at the same time daily</li>
+                        <li><strong>Environment:</strong> Keep your bedroom cool, dark, and quiet</li>
+                        <li><strong>Pre-sleep routine:</strong> Develop calming activities before bed</li>
+                        <li><strong>Avoid stimulants:</strong> Limit caffeine, alcohol, and screens before bedtime</li>
+                    </ul>
+                    
+                    <h3>When Sleep Problems Persist</h3>
+                    <p>If sleep difficulties continue despite good sleep hygiene, consider seeking professional help. Sleep disorders are treatable, and addressing them can significantly improve your overall mental health.</p>
+                `
+            },
+            {
+                id: 8,
+                title: "Mindfulness and Emotional Regulation",
+                author: "Dr. Jon Kabat-Zinn",
+                category: "stress",
+                tags: ["mindfulness", "emotional regulation", "meditation"],
+                readTime: "7 min read",
+                summary: "Discover how mindfulness practices can help you develop better emotional regulation and reduce stress.",
+                content: `
+                    <h3>What is Mindfulness?</h3>
+                    <p>Dr. Jon Kabat-Zinn defines mindfulness as "paying attention in a particular way: on purpose, in the present moment, and non-judgmentally." This simple practice has profound effects on mental health.</p>
+                    
+                    <h3>The Science of Mindfulness</h3>
+                    <p>Research shows that regular mindfulness practice can:</p>
+                    <ul>
+                        <li>Reduce activity in the amygdala (fear center)</li>
+                        <li>Strengthen the prefrontal cortex (executive function)</li>
+                        <li>Improve emotional regulation</li>
+                        <li>Decrease stress hormones</li>
+                    </ul>
+                    
+                    <h3>Simple Mindfulness Practices</h3>
+                    <ul>
+                        <li><strong>Breathing meditation:</strong> Focus on your breath for 5-10 minutes daily</li>
+                        <li><strong>Body scan:</strong> Notice physical sensations without judgment</li>
+                        <li><strong>Mindful walking:</strong> Pay attention to each step and your surroundings</li>
+                        <li><strong>STOP technique:</strong> Stop, Take a breath, Observe, Proceed mindfully</li>
+                    </ul>
+                    
+                    <h3>Integration into Daily Life</h3>
+                    <p>Mindfulness isn't just about formal meditation. You can practice mindful eating, listening, or even mindful studying. The key is bringing full attention to whatever you're doing.</p>
+                `
+            }
+        ];
+
+        // AI Article System
+        let currentFilter = 'all';
+        let displayedArticles = [];
+
+        // Initialize articles on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            if (document.getElementById('articles-container')) {
+                displayArticles(psychologyArticles);
+            }
+        });
+
+        function displayArticles(articles) {
+            const container = document.getElementById('articles-container');
+            if (!container) return;
+
+            displayedArticles = articles;
+            container.innerHTML = '';
+
+            articles.forEach(article => {
+                const articleCard = document.createElement('div');
+                articleCard.className = 'bg-white rounded-lg shadow-md p-6 card-hover cursor-pointer';
+                articleCard.onclick = () => openArticleModal(article);
+
+                articleCard.innerHTML = `
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex-1">
+                            <h4 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">${article.title}</h4>
+                            <p class="text-indigo-600 text-sm font-medium mb-2">by ${article.author}</p>
+                        </div>
+                        <div class="text-2xl ml-4">${getCategoryIcon(article.category)}</div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">${article.summary}</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-wrap gap-1">
+                            ${article.tags.slice(0, 2).map(tag =>
+                    `<span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">${tag}</span>`
+                ).join('')}
+                        </div>
+                        <span class="text-xs text-gray-500">${article.readTime}</span>
+                    </div>
+                `;
+
+                container.appendChild(articleCard);
+            });
+        }
+
+        function getCategoryIcon(category) {
+            const icons = {
+                anxiety: '😰',
+                depression: '💙',
+                stress: '😤',
+                relationships: '💕',
+                self_esteem: '✨',
+                academic: '📚',
+                sleep: '😴'
+            };
+            return icons[category] || '🧠';
+        }
+
+        function filterArticles(category) {
+            currentFilter = category;
+
+            // Update button states
+            document.querySelectorAll('[onclick^="filterArticles"]').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-indigo-600');
+                btn.classList.add('bg-white', 'bg-opacity-20');
+            });
+
+            event.target.classList.remove('bg-opacity-20');
+            event.target.classList.add('bg-white', 'text-indigo-600');
+
+            if (category === 'all') {
+                displayArticles(psychologyArticles);
+            } else {
+                const filtered = psychologyArticles.filter(article => article.category === category);
+                displayArticles(filtered);
+            }
+        }
+
+        function searchArticles() {
+            const searchTerm = document.getElementById('article-search').value.toLowerCase().trim();
+
+            if (!searchTerm) {
+                displayArticles(psychologyArticles);
+                return;
+            }
+
+            // AI-like search that matches keywords to categories and content
+            const searchResults = psychologyArticles.filter(article => {
+                const searchableText = `${article.title} ${article.summary} ${article.tags.join(' ')} ${article.content}`.toLowerCase();
+
+                // Check for direct matches
+                if (searchableText.includes(searchTerm)) return true;
+
+                // Check for related terms (simple AI-like matching)
+                const relatedTerms = {
+                    'worried': ['anxiety', 'stress'],
+                    'sad': ['depression', 'mood'],
+                    'overwhelmed': ['stress', 'anxiety'],
+                    'lonely': ['relationships', 'depression'],
+                    'worthless': ['self_esteem', 'depression'],
+                    'tired': ['sleep', 'depression'],
+                    'grades': ['academic', 'stress'],
+                    'friends': ['relationships', 'social'],
+                    'confidence': ['self_esteem', 'anxiety']
+                };
+
+                for (const [key, values] of Object.entries(relatedTerms)) {
+                    if (searchTerm.includes(key)) {
+                        return values.some(value => searchableText.includes(value));
+                    }
+                }
+
+                return false;
+            });
+
+            displayArticles(searchResults);
+
+            if (searchResults.length === 0) {
+                document.getElementById('articles-container').innerHTML = `
+                    <div class="col-span-2 text-center py-8">
+                        <div class="text-4xl mb-4">🔍</div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">No articles found</h3>
+                        <p class="text-gray-600 mb-4">Try searching for terms like "anxiety", "stress", "relationships", or "sleep"</p>
+                        <button onclick="filterArticles('all')" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md transition-colors">
+                            View All Articles
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function openArticleModal(article) {
+            document.getElementById('modal-title').textContent = article.title;
+            document.getElementById('modal-author').textContent = `by ${article.author}`;
+            document.getElementById('modal-content').innerHTML = article.content;
+            document.getElementById('modal-read-time').textContent = article.readTime;
+
+            const tagsContainer = document.getElementById('modal-tags');
+            tagsContainer.innerHTML = article.tags.map(tag =>
+                `<span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-sm rounded-full">${tag}</span>`
+            ).join('');
+
+            document.getElementById('article-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArticleModal() {
+            document.getElementById('article-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('article-modal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeArticleModal();
+            }
+        });
+
+        function setMood(button, mood) {
+            // Remove active state from all mood buttons
+            document.querySelectorAll('[onclick^="setMood"]').forEach(btn => {
+                btn.classList.remove('bg-blue-100');
+            });
+
+            // Add active state to selected button
+            button.classList.add('bg-blue-100');
+
+            // Show appropriate message and suggest relevant articles
+            const messages = {
+                '😢': 'We understand you\'re having a tough day. Consider reaching out to our counseling services.',
+                '😐': 'It\'s okay to have neutral days. Maybe try a short meditation session?',
+                '🙂': 'Good to see you\'re doing well! Keep up the positive momentum.',
+                '😊': 'Great mood! Consider sharing your positivity with others today.',
+                '😄': 'Fantastic! Your positive energy is contagious. Have an amazing day!'
+            };
+
+            document.getElementById('mood-message').textContent = messages[mood];
+
+            // Auto-suggest articles based on mood
+            if (mood === '😢') {
+                setTimeout(() => {
+                    if (confirm('Would you like to see some helpful articles about managing difficult emotions?')) {
+                        showTab('mental');
+                        filterArticles('depression');
+                    }
+                }, 2000);
+            } else if (mood === '😐') {
+                setTimeout(() => {
+                    if (confirm('Would you like to explore some mindfulness articles to boost your mood?')) {
+                        showTab('mental');
+                        filterArticles('stress');
+                    }
+                }, 2000);
+            }
+        }
+
+        // AI Mental Health Knowledge Database
+        const mentalHealthKnowledge = {
+            anxiety: {
+                techniques: [
+                    "Practice deep breathing: Inhale for 4 counts, hold for 4, exhale for 6",
+                    "Use the 5-4-3-2-1 grounding technique: Name 5 things you see, 4 you hear, 3 you touch, 2 you smell, 1 you taste",
+                    "Challenge anxious thoughts by asking: 'Is this thought realistic? What evidence do I have?'",
+                    "Try progressive muscle relaxation: Tense and release each muscle group",
+                    "Practice mindfulness meditation for 5-10 minutes daily"
+                ],
+                sources: [
+                    "American Psychological Association - Anxiety Disorders",
+                    "National Institute of Mental Health - Anxiety Disorders",
+                    "Anxiety and Depression Association of America",
+                    "Mayo Clinic - Anxiety Management Techniques"
+                ]
+            },
+            depression: {
+                techniques: [
+                    "Engage in behavioral activation: Schedule one pleasant activity daily",
+                    "Practice self-compassion: Treat yourself with the kindness you'd show a friend",
+                    "Maintain a daily routine, even a simple one",
+                    "Connect with others: Reach out to friends, family, or support groups",
+                    "Focus on small, achievable goals rather than overwhelming tasks"
+                ],
+                sources: [
+                    "World Health Organization - Depression Fact Sheet",
+                    "National Alliance on Mental Illness - Depression",
+                    "American Psychiatric Association - Depression Guidelines",
+                    "Crisis Text Line: Text HOME to 741741"
+                ]
+            },
+            stress: {
+                techniques: [
+                    "Use time management: Break large tasks into smaller, manageable steps",
+                    "Practice the STOP technique: Stop, Take a breath, Observe, Proceed mindfully",
+                    "Engage in regular physical exercise, even just 10-15 minutes daily",
+                    "Set healthy boundaries: Learn to say no to excessive demands",
+                    "Try stress-reduction activities: yoga, meditation, or listening to music"
+                ],
+                sources: [
+                    "American Psychological Association - Stress Management",
+                    "Harvard Health - Stress Management Techniques",
+                    "Mayo Clinic - Stress Management",
+                    "National Institute of Mental Health - Stress and Mental Health"
+                ]
+            },
+            sleep: {
+                techniques: [
+                    "Maintain a consistent sleep schedule: Go to bed and wake up at the same time daily",
+                    "Create a relaxing bedtime routine: No screens 1 hour before bed",
+                    "Keep your bedroom cool, dark, and quiet",
+                    "Avoid caffeine, alcohol, and large meals before bedtime",
+                    "Try relaxation techniques: deep breathing, progressive muscle relaxation, or meditation"
+                ],
+                sources: [
+                    "National Sleep Foundation - Sleep Hygiene Tips",
+                    "American Academy of Sleep Medicine",
+                    "Mayo Clinic - Sleep Disorders",
+                    "Harvard Medical School - Sleep and Mental Health"
+                ]
+            }
+        };
+
+        // Chatbot state
+        let chatbotActive = false;
+
+        // AI Chatbot Functions
+        function toggleChatbot() {
+            const interface = document.getElementById('chatbot-interface');
+            const toggle = document.getElementById('chatbot-toggle');
+
+            if (chatbotActive) {
+                interface.classList.add('hidden');
+                toggle.textContent = 'Start Chat';
+                chatbotActive = false;
+            } else {
+                interface.classList.remove('hidden');
+                toggle.textContent = 'End Chat';
+                chatbotActive = true;
+                document.getElementById('chat-input').focus();
+            }
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function quickResponse(message) {
+            document.getElementById('chat-input').value = message;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Add user message to chat
+            addMessageToChat('user', message);
+            input.value = '';
+
+            // Generate AI response
+            setTimeout(() => {
+                const response = generateAIResponse(message);
+                addMessageToChat('ai', response.text, response.sources, response.suggestions);
+            }, 1000);
+        }
+
+        function addMessageToChat(sender, message, sources = [], suggestions = []) {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start space-x-3 mb-4';
+
+            if (sender === 'user') {
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white text-sm font-bold">U</div>
+                    <div class="flex-1">
+                        <div class="bg-gray-100 rounded-lg p-3">
+                            <p class="text-gray-800">${message}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                let sourcesHtml = '';
+                if (sources.length > 0) {
+                    sourcesHtml = `
+                        <div class="mt-3 p-3 bg-blue-50 rounded-lg">
+                            <p class="text-sm font-medium text-blue-800 mb-2">📚 Sources & References:</p>
+                            <ul class="text-sm text-blue-700 space-y-1">
+                                ${sources.map(source => `<li>• ${source}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+
+                let suggestionsHtml = '';
+                if (suggestions.length > 0) {
+                    suggestionsHtml = `
+                        <div class="mt-3 flex flex-wrap gap-2">
+                            ${suggestions.map(suggestion =>
+                        `<button onclick="quickResponse('${suggestion}')" class="px-3 py-1 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 text-sm rounded-full transition-colors">${suggestion}</button>`
+                    ).join('')}
+                        </div>
+                    `;
+                }
+
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center text-white text-sm font-bold">AI</div>
+                    <div class="flex-1">
+                        <div class="bg-white rounded-lg p-3 shadow-sm">
+                            <p class="text-gray-800">${message}</p>
+                            ${sourcesHtml}
+                            ${suggestionsHtml}
+                        </div>
+                    </div>
+                `;
+            }
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function generateAIResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+
+            // Detect mental health topics
+            let detectedTopic = null;
+            let confidence = 0;
+
+            for (const [topic, data] of Object.entries(mentalHealthKnowledge)) {
+                const keywords = getTopicKeywords(topic);
+                const matches = keywords.filter(keyword => message.includes(keyword)).length;
+                const topicConfidence = matches / keywords.length;
+
+                if (topicConfidence > confidence) {
+                    confidence = topicConfidence;
+                    detectedTopic = topic;
+                }
+            }
+
+            // Generate contextual response
+            if (detectedTopic && confidence > 0.2) {
+                return generateTopicResponse(detectedTopic, message);
+            } else {
+                return generateGeneralResponse(message);
+            }
+        }
+
+        function getTopicKeywords(topic) {
+            const keywords = {
+                anxiety: ['anxious', 'worried', 'panic', 'nervous', 'fear', 'overwhelmed', 'racing thoughts'],
+                depression: ['sad', 'depressed', 'hopeless', 'empty', 'worthless', 'tired', 'unmotivated'],
+                stress: ['stressed', 'pressure', 'overwhelmed', 'busy', 'deadline', 'workload', 'tension'],
+                sleep: ['sleep', 'insomnia', 'tired', 'exhausted', 'rest', 'nightmares', 'wake up']
+            };
+            return keywords[topic] || [];
+        }
+
+        function generateTopicResponse(topic, message) {
+            const data = mentalHealthKnowledge[topic];
+            const responses = {
+                anxiety: [
+                    "I understand you're feeling anxious. Anxiety is very common and treatable. Let me share some evidence-based techniques that can help.",
+                    "It sounds like you're experiencing anxiety. Remember, you're not alone in this, and there are effective ways to manage these feelings.",
+                    "Anxiety can feel overwhelming, but there are proven strategies that can help you feel more in control."
+                ],
+                depression: [
+                    "I hear that you're going through a difficult time. Depression is a real medical condition, and it's important to know that help is available.",
+                    "Thank you for sharing how you're feeling. Depression can make everything feel harder, but there are effective treatments and strategies.",
+                    "It takes courage to reach out when you're feeling this way. Let me share some approaches that have helped many people."
+                ],
+                stress: [
+                    "Stress is a normal part of life, but when it becomes overwhelming, it's important to have good coping strategies.",
+                    "I can see you're dealing with a lot of stress right now. Let's explore some techniques that can help you manage it better.",
+                    "Feeling stressed is completely understandable. Here are some evidence-based approaches that can help."
+                ],
+                sleep: [
+                    "Sleep problems can really impact your overall well-being. Good sleep hygiene is crucial for mental health.",
+                    "I understand sleep issues can be frustrating. There are several strategies that can help improve your sleep quality.",
+                    "Sleep and mental health are closely connected. Let me share some techniques that can help you get better rest."
+                ]
+            };
+
+            const responseText = responses[topic][Math.floor(Math.random() * responses[topic].length)];
+            const techniques = data.techniques.slice(0, 3); // Show top 3 techniques
+            const fullResponse = `${responseText}\n\nHere are some techniques you can try:\n${techniques.map((t, i) => `${i + 1}. ${t}`).join('\n')}`;
+
+            const suggestions = [
+                "Tell me more about this",
+                "What else can help?",
+                "I want to try these techniques",
+                "Can you recommend articles?"
+            ];
+
+            return {
+                text: fullResponse,
+                sources: data.sources,
+                suggestions: suggestions
+            };
+        }
+
+        function generateGeneralResponse(message) {
+            const generalResponses = [
+                "Thank you for sharing that with me. Can you tell me more about what you're experiencing?",
+                "I'm here to listen and support you. What's been on your mind lately?",
+                "It sounds like you're going through something. Would you like to talk about what's been bothering you?",
+                "I appreciate you reaching out. Sometimes it helps to talk about what we're feeling. What's been challenging for you?",
+                "Everyone goes through difficult times. What specific feelings or situations would you like to discuss?"
+            ];
+
+            const response = generalResponses[Math.floor(Math.random() * generalResponses.length)];
+            const suggestions = [
+                "I feel anxious",
+                "I am stressed",
+                "I feel sad",
+                "I cannot sleep",
+                "I need help with relationships"
+            ];
+
+            return {
+                text: response,
+                sources: ["National Alliance on Mental Illness", "Mental Health America", "Crisis Text Line: Text HOME to 741741"],
+                suggestions: suggestions
+            };
+        }
+    </script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'98b392bbe18c405b',t:'MTc1OTkwNDg1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>

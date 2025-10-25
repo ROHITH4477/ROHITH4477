@@ -1,0 +1,144 @@
+--- App.js ---
+import React, { useState } from "react";
+import Navbar from "./Navbar";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+import Dashboard from "./Dashboard";
+
+function App() {
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("currentWellnessUser")) || null
+  );
+  const [view, setView] = useState(user ? "dashboard" : "login");
+
+  const handleLogin = (userInfo) => {
+    setUser(userInfo);
+    setView("dashboard");
+    localStorage.setItem("currentWellnessUser", JSON.stringify(userInfo));
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    setView("login");
+    localStorage.removeItem("currentWellnessUser");
+  };
+
+  return (
+    <div>
+      <Navbar
+        user={user}
+        onLogout={handleLogout}
+        showLogin={() => setView("login")}
+        showRegister={() => setView("register")}
+      />
+      {view === "login" && (
+        <LoginForm onLogin={handleLogin} showRegister={() => setView("register")} />
+      )}
+      {view === "register" && (
+        <RegisterForm showLogin={() => setView("login")} />
+      )}
+      {view === "dashboard" && user && <Dashboard user={user} />}
+    </div>
+  );
+}
+export default App;
+
+--- Navbar.js ---
+function Navbar({ user, onLogout, showLogin, showRegister }) {
+  return (
+    <nav style={{background:'linear-gradient(135deg,#667eea 0%,#764ba2 100%)',padding:'1em',color:'white'}}>
+      <span style={{fontWeight:'bold',fontSize:24}}>Campus Wellness Hub</span>
+      {!user ? (
+        <>
+          <button onClick={showLogin}>Login</button>
+          <button onClick={showRegister}>Register</button>
+        </>
+      ) : (
+        <>
+          <span style={{marginLeft:'1em'}}>Welcome, {user.name}!</span>
+          <button style={{marginLeft:'1em'}} onClick={onLogout}>Logout</button>
+        </>
+      )}
+    </nav>
+  );
+}
+export default Navbar;
+
+--- LoginForm.js ---
+import React, { useState } from "react";
+function LoginForm({ onLogin, showRegister }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const users = JSON.parse(localStorage.getItem('wellnessUsers')) || [];
+    const user = users.find(u => u.email === email && u.password === password);
+    if (user) {
+      onLogin(user);
+    } else {
+      alert('Invalid credentials or user not found.');
+    }
+  }
+  return (
+    <form onSubmit={handleSubmit} style={{margin:'2em auto',maxWidth:400,padding:24,background:'#fff',borderRadius:12}}>
+      <h2 style={{textAlign:'center'}}>Login</h2>
+      <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required style={{width:'100%',marginBottom:8,padding:8}}/>
+      <input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" required style={{width:'100%',marginBottom:8,padding:8}}/>
+      <button style={{width:'100%',padding:8,background:'#764ba2',color:'white'}}>Login</button>
+      <button type="button" onClick={showRegister} style={{width:'100%',marginTop:8,background:'transparent',color:'#764ba2'}}>Register</button>
+    </form>
+  );
+}
+export default LoginForm;
+
+--- RegisterForm.js ---
+import React, { useState } from "react";
+function RegisterForm({ showLogin }) {
+  const [form, setForm] = useState({ name: "", email: "", studentId: "", password: "" });
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    let users = JSON.parse(localStorage.getItem('wellnessUsers')) || [];
+    if (users.find(u => u.email === form.email)) {
+      alert('Email already registered!');
+      return;
+    }
+    users.push({ ...form, id: Date.now() });
+    localStorage.setItem('wellnessUsers', JSON.stringify(users));
+    alert('Registered successfully!');
+    showLogin();
+  }
+  return (
+    <form onSubmit={handleSubmit} style={{margin:'2em auto',maxWidth:400,padding:24,background:'#fff',borderRadius:12}}>
+      <h2 style={{textAlign:'center'}}>Register</h2>
+      <input name="name" value={form.name} onChange={handleChange} placeholder="Full Name" required style={{width:'100%',marginBottom:8,padding:8}}/>
+      <input name="email" value={form.email} onChange={handleChange} placeholder="Email" required style={{width:'100%',marginBottom:8,padding:8}}/>
+      <input name="studentId" value={form.studentId} onChange={handleChange} placeholder="Student ID" required style={{width:'100%',marginBottom:8,padding:8}}/>
+      <input name="password" value={form.password} onChange={handleChange} type="password" placeholder="Password" required style={{width:'100%',marginBottom:8,padding:8}}/>
+      <button style={{width:'100%',padding:8,background:'#667eea',color:'white'}}>Register</button>
+      <button type="button" onClick={showLogin} style={{width:'100%',marginTop:8,background:'transparent',color:'#667eea'}}>Login</button>
+    </form>
+  );
+}
+export default RegisterForm;
+
+--- Dashboard.js ---
+function Dashboard({ user }) {
+  return (
+    <div style={{margin:'2em auto',maxWidth:600,padding:24,background:'#e9d7fa',borderRadius:12}}>
+      <h2 style={{color:'#764ba2'}}>Welcome to Your Wellness Journey, {user.name}!</h2>
+      <div style={{marginTop:16}}>
+        <div style={{background:'#fff',padding:16,borderRadius:8,marginBottom:16}}>
+          <strong>Physical Health</strong><br/>Fitness & Nutrition coming soon!
+        </div>
+        <div style={{background:'#fff',padding:16,borderRadius:8}}>
+          <strong>Mental Health</strong><br/>Mindfulness & Counseling coming soon!
+        </div>
+      </div>
+    </div>
+  );
+}
+export default Dashboard;
